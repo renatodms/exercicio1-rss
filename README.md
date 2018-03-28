@@ -1,8 +1,10 @@
 # Tarefa #1 - RSS 
 
-Esta tarefa envolve os conceitos de UI widgets, AsyncTasks, Custom Adapters, Intents, Permissions, e SharedPreferences. Siga os passos na ordem sugerida e marque abaixo quais os passos completados. 
+Esta tarefa envolve os conceitos de UI widgets, AsyncTasks, Custom Adapters, Intents, Permissions, e SharedPreferences. 
+Faça um clone ou fork deste projeto, siga os passos na ordem sugerida e marque mais abaixo, na sua resposta, quais os passos completados. 
+Para entregar o exercício, responda o [formulário de entrega](https://docs.google.com/forms/d/e/1FAIpQLSdQksHsbYqlciFS5JHAGlODKsXAY0MUUlA33I_Aur3DkbmMDg/viewform) até 02/04/2018, às 23h59.
 
-  1. Inicialmente, teste a aplicação e certifique-se de que está tudo funcionando.
+  1. Teste a aplicação e certifique-se de que está tudo funcionando.
   2. Altere a aplicação RSS de forma que passe a processar o arquivo XML usando a classe `ParserRSS`.
   3. Uma vez processado o XML por meio do parser, é retornado um objeto do tipo `List<ItemRSS>`. 
   4. Use este objeto para popular um `ListView` por meio de um `Adapter` --- o widget deve manter o mesmo id do TextView (`conteudoRSS`).
@@ -17,7 +19,7 @@ Esta tarefa envolve os conceitos de UI widgets, AsyncTasks, Custom Adapters, Int
 # Orientações
 
   - Comente o código que você desenvolver, explicando o que cada parte faz.
-  - Entregue o exercício mesmo que não tenha completado todos os itens listados acima. (marque abaixo o que completou)
+  - Entregue o exercício *mesmo que não tenha completado todos os itens* listados. Marque abaixo apenas o que completou.
 
 ----
 
