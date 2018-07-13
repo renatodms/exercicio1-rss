@@ -1,7 +1,9 @@
 package br.ufpe.cin.if1001.rss;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -42,6 +44,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Salvar o feed em uma SharedPreferences
+        SharedPreferences sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("rssfeed", getString(R.string.rss_feed_default));
+        editor.commit();
+
         //use ListView ao invés de TextView - deixe o ID no layout XML com o mesmo nome conteudoRSS
         //isso vai exigir o processamento do XML baixado da internet usando o ParserRSS
         //conteudoRSS = (TextView) findViewById(R.id.conteudoRSS);
@@ -68,7 +77,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        new CarregaRSStask().execute(RSS_FEED);
+
+        //Carregar o feed a partir da SharedPreferences
+        SharedPreferences sharedPref = getPreferences(MODE_PRIVATE);
+        String rss_feed_preference = sharedPref.getString("rssfeed", "");
+
+        new CarregaRSStask().execute(rss_feed_preference);
     }
 
     private class CarregaRSStask extends AsyncTask<String, Void, String> {
