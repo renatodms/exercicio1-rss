@@ -3,6 +3,8 @@ package br.ufpe.cin.if1001.rss;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -24,7 +28,8 @@ public class MainActivity extends Activity {
     //http://pox.globo.com/rss/g1/tecnologia/
 
     //use ListView ao invés de TextView - deixe o atributo com o mesmo nome
-    private TextView conteudoRSS;
+    //private TextView conteudoRSS;
+    private ListView conteudoRSS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +37,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         //use ListView ao invés de TextView - deixe o ID no layout XML com o mesmo nome conteudoRSS
         //isso vai exigir o processamento do XML baixado da internet usando o ParserRSS
-        conteudoRSS = (TextView) findViewById(R.id.conteudoRSS);
+        //conteudoRSS = (TextView) findViewById(R.id.conteudoRSS);
+        conteudoRSS = (ListView) findViewById(R.id.conteudoRSS);
     }
 
     @Override
@@ -64,7 +70,16 @@ public class MainActivity extends Activity {
 
             //ajuste para usar uma ListView
             //o layout XML a ser utilizado esta em res/layout/itemlista.xml
-            conteudoRSS.setText(s);
+            ParserRSS parserRSS = new ParserRSS();
+            ArrayAdapter<ItemRSS> adaperRSS = null;
+            try{
+                List<ItemRSS> result = parserRSS.parse(s);
+                adaperRSS = new ArrayAdapter<ItemRSS>(getApplicationContext(), android.R.layout.simple_list_item_1, result);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "erro no parserSimples", Toast.LENGTH_SHORT).show();
+            }
+            //conteudoRSS.setText(s);
+            conteudoRSS.setAdapter(adaperRSS);
         }
     }
 
