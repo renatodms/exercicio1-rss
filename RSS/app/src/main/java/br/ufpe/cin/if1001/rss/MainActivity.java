@@ -71,12 +71,14 @@ public class MainActivity extends Activity {
             //ajuste para usar uma ListView
             //o layout XML a ser utilizado esta em res/layout/itemlista.xml
             ParserRSS parserRSS = new ParserRSS();
-            ArrayAdapter<ItemRSS> adaperRSS = null;
+            AdapterRSS adaperRSS = null;
             try{
                 List<ItemRSS> result = parserRSS.parse(s);
-                adaperRSS = new ArrayAdapter<ItemRSS>(getApplicationContext(), android.R.layout.simple_list_item_1, result);
+                //Uso do adapter para popular o ListView
+                adaperRSS = new AdapterRSS(MainActivity.this, result);
             }catch (Exception e){
-                Toast.makeText(getApplicationContext(), "erro no parserSimples", Toast.LENGTH_SHORT).show();
+                //Caso ocorra um erro no parser
+                Toast.makeText(getApplicationContext(), "erro no parser", Toast.LENGTH_SHORT).show();
             }
             //conteudoRSS.setText(s);
             conteudoRSS.setAdapter(adaperRSS);

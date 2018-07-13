@@ -1,4 +1,4 @@
-# Tarefa #1 - RSS 
+﻿# Tarefa #1 - RSS 
 
 Esta tarefa envolve os conceitos de UI widgets, AsyncTasks, Custom Adapters, Intents, Permissions, e SharedPreferences. 
 Faça um clone ou fork deste projeto, siga os passos na ordem sugerida e marque mais abaixo, na sua resposta, quais os passos completados. 
@@ -32,7 +32,7 @@ Para entregar o exercício, responda o [formulário de entrega](https://docs.goo
 | 3 | **sim** |
 | 4 | **sim** |
 | 5 | **sim** |
-| 6 | **não** |
+| 6 | **sim** |
 | 7 | **não** |
 | 8 | **não** |
 | 9 | **não** |
