@@ -1,8 +1,12 @@
 package br.ufpe.cin.if1001.rss;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +35,9 @@ public class MainActivity extends Activity {
     //private TextView conteudoRSS;
     private ListView conteudoRSS;
 
+    //Lista de ItemRSS que for recuperada
+    private List<ItemRSS> itemRSSList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,23 @@ public class MainActivity extends Activity {
         //isso vai exigir o processamento do XML baixado da internet usando o ParserRSS
         //conteudoRSS = (TextView) findViewById(R.id.conteudoRSS);
         conteudoRSS = (ListView) findViewById(R.id.conteudoRSS);
+
+        //Listener do LisTWiew para abrir o WebView ao clicar em um título
+        conteudoRSS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                //Recupera o link do item selecionado
+                Uri uri = Uri.parse(itemRSSList.get(i).getLink());
+
+                //Abrir o browser
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+                //Toast.makeText(getApplicationContext(), itemRSSList.get(i).getLink(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -73,9 +97,9 @@ public class MainActivity extends Activity {
             ParserRSS parserRSS = new ParserRSS();
             AdapterRSS adaperRSS = null;
             try{
-                List<ItemRSS> result = parserRSS.parse(s);
+                itemRSSList = parserRSS.parse(s);
                 //Uso do adapter para popular o ListView
-                adaperRSS = new AdapterRSS(MainActivity.this, result);
+                adaperRSS = new AdapterRSS(MainActivity.this, itemRSSList);
             }catch (Exception e){
                 //Caso ocorra um erro no parser
                 Toast.makeText(getApplicationContext(), "erro no parser", Toast.LENGTH_SHORT).show();
